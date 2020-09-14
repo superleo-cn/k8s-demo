@@ -1,4 +1,3 @@
-# 开发的时候，指定为dev或者local即可。发布时候，通过-Dspring.cloud.config.profile来指定真正的profile
 spring:
   application.name: gateway
   cloud:
