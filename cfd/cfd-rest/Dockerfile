@@ -1,4 +1,4 @@
-FROM registry.cn-hongkong.aliyuncs.com/snapex/opera/alpine-jdk-arthas:1.0.0
+FROM frolvlad/alpine-java:jre8-slim
 
 RUN  mkdir -p /app/logs
 COPY target/*.jar /app/app.jar
