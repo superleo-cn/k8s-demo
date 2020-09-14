@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+  namespace: k8s-demo
+  labels:
+    app: gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      ## 读取权限
+      serviceAccountName: config-reader
+      containers:
+        - name: gateway
+          image: gateway:2.0.0-SNAPSHOT
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          command: ["java",  "-Xmx512m", "-Xms512m", "-jar", "/app/app.jar"]

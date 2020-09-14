@@ -1,0 +1,29 @@
+# 版本
+apiVersion: v1
+# 类型
+kind: Service
+# 元数据
+metadata:
+  # 服务名称
+  name: gateway-service
+  # 命名空间
+  namespace: k8s-demo
+# 详细描述
+spec:
+  # 类型: ClusterIP(默认，虚IP，k8s集群内部访问), NodePort(使用宿主机端口，使能够访问各Node的外部客户端通过Node的IPI地址+端口就能访问服务)
+  # LoadBalancer(使用外接负载均衡器完成负载分钟，需要在spec.status.loadBalancer知道外部负载均衡IPI地址，并同时定义nodePort和clusterIP，用于公有云环境)
+  type: NodePort
+  # Label Select配置，将选择具有知道Label标签的pod作为管理范围
+  selector:
+    # 这里对应于pod.yaml中的 labels.app
+    app: gateway
+  # 服务需要暴露的端口列表
+  ports:
+    #协议
+    - protocol: TCP
+      # 服务监听的端口
+      port: 9000
+      # 需要转发到后端pod的端口(在这里就是gateway的端口)
+      targetPort: 8000
+      # 当spec.type=NodePort时，之地映射到物理机的端口号
+      nodePort: 30000

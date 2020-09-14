@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cfd
+  namespace: k8s-demo
+  labels:
+    app: cfd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cfd
+  template:
+    metadata:
+      labels:
+        app: cfd
+    spec:
+      serviceAccountName: config-reader
+      containers:
+        - name: cfd
+          image: cfd-rest:2.0.0-SNAPSHOT
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8020
+          command: ["java",  "-Xmx512m", "-Xms512m", "-jar", "/app/app.jar"]

@@ -1,0 +1,20 @@
+server:
+  port: 8000
+
+logging:
+  level:
+    root: INFO
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,refresh,keepalive,health
