@@ -1,4 +1,3 @@
-# 连接远程nacos的配置
 spring:
   application:
     name: cfd-rest
